@@ -1,0 +1,43 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-person-table
+      author: deinName
+      changes:
+        - createTable:
+            tableName: person
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+              - column:
+                  name: last_name
+                  type: VARCHAR(255)
+
+  - changeSet:
+      id: insert-persons
+      author: deinName
+      changes:
+        - insert:
+            tableName: person
+            columns:
+              - column:
+                  name: first_name
+                  value: Max
+              - column:
+                  name: last_name
+                  value: Mustermann
+        - insert:
+            tableName: person
+            columns:
+              - column:
+                  name: first_name
+                  value: Erika
+              - column:
+                  name: last_name
+                  value: Musterfrau
