@@ -1,0 +1,59 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-record-category-testdata
+      author: art
+      changes:
+        - insert:
+            tableName: record_categories
+            columns:
+              - column:
+                  name: created_by
+                  value: art
+              - column:
+                  name: updated_by
+                  value: art
+              - column:
+                  name: version
+                  valueNumeric: 1
+              - column:
+                  name: record_category_name
+                  value: Heating
+              - column:
+                  name: description
+                  value: Heat pump
+        - insert:
+            tableName: record_categories
+            columns:
+              - column:
+                  name: created_by
+                  value: art
+              - column:
+                  name: updated_by
+                  value: art
+              - column:
+                  name: version
+                  valueNumeric: 2
+              - column:
+                  name: record_category_name
+                  value: Electricity
+              - column:
+                  name: description
+                  value: Electricity consumed in the household
+        - insert:
+            tableName: record_categories
+            columns:
+              - column:
+                  name: created_by
+                  value: art
+              - column:
+                  name: updated_by
+                  value: art
+              - column:
+                  name: version
+                  valueNumeric: 3
+              - column:
+                  name: record_category_name
+                  value: Water
+              - column:
+                  name: description
+                  value: Water consumed in the household
