@@ -3,7 +3,4 @@ databaseChangeLog:
       file: db/changelog/init-tables.yaml
 
   - include:
-      file: db/changelog/create-person-data.yaml
-
-  - include:
-      file: db/changelog/insert-test-record_category.yaml
+      file: db/changelog/insert-data.yaml

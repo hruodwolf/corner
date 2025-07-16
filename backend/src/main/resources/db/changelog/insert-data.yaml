@@ -1,0 +1,181 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data
+      author: art
+      changes:
+        - insert:
+            tableName: person
+            columns:
+              - column:
+                  name: first_name
+                  value: Max
+              - column:
+                  name: last_name
+                  value: Mustermann
+        - insert:
+            tableName: person
+            columns:
+              - column:
+                  name: first_name
+                  value: Erika
+              - column:
+                  name: last_name
+                  value: Musterfrau
+        - insert:
+            tableName: record_categories
+            columns:
+              - column:
+                  name: created_by
+                  value: art
+              - column:
+                  name: updated_by
+                  value: art
+              - column:
+                  name: version
+                  valueNumeric: 1
+              - column:
+                  name: record_category_name
+                  value: Electricity heating
+              - column:
+                  name: description
+                  value: Power consumption of the heat pump
+        - insert:
+            tableName: record_categories
+            columns:
+              - column:
+                  name: created_by
+                  value: art
+              - column:
+                  name: updated_by
+                  value: art
+              - column:
+                  name: version
+                  valueNumeric: 2
+              - column:
+                  name: record_category_name
+                  value: Electricity household
+              - column:
+                  name: description
+                  value: Electricity consumed in the household
+        - insert:
+            tableName: record_categories
+            columns:
+              - column:
+                  name: created_by
+                  value: art
+              - column:
+                  name: updated_by
+                  value: art
+              - column:
+                  name: version
+                  valueNumeric: 3
+              - column:
+                  name: record_category_name
+                  value: Water
+              - column:
+                  name: description
+                  value: Water consumed in the household
+        - insert:
+            tableName: measurement_units
+            columns:
+              - column:
+                  name: created_by
+                  value: test_user
+              - column:
+                  name: updated_by
+                  value: test_user
+              - column:
+                  name: version
+                  valueNumeric: 1
+              - column:
+                  name: name_en
+                  value: Cubic meter
+              - column:
+                  name: symbol
+                  value: m³
+              - column:
+                  name: quantity_type
+                  value: Volume
+              - column:
+                  name: description
+                  value: Standard unit of volume in the SI system
+        - insert:
+            tableName: measurement_units
+            columns:
+              - column:
+                  name: created_by
+                  value: test_user
+              - column:
+                  name: updated_by
+                  value: test_user
+              - column:
+                  name: version
+                  valueNumeric: 1
+              - column:
+                  name: name_en
+                  value: Kilowatt-hour
+              - column:
+                  name: symbol
+                  value: kWh
+              - column:
+                  name: quantity_type
+                  value: Energy
+              - column:
+                  name: description
+                  value: Common unit of energy used for electricity billing
+
+        - insert:
+            tableName: records
+            columns:
+              - column:
+                  name: created_by
+                  value: test_user
+              - column:
+                  name: updated_by
+                  value: test_user
+              - column:
+                  name: version
+                  valueNumeric: 1
+              - column:
+                  name: record_date
+                  valueDate: 2024-07-01
+              - column:
+                  name: record_value
+                  valueNumeric: 123.45
+              - column:
+                  name: description
+                  value: Daily measurement of gas usage
+              - column:
+                  name: record_category_id
+                  valueNumeric: 1
+              - column:
+                  name: unit_id
+                  valueNumeric: 1
+
+        - insert:
+            tableName: records
+            columns:
+              - column:
+                  name: created_by
+                  value: test_user
+              - column:
+                  name: updated_by
+                  value: test_user
+              - column:
+                  name: version
+                  valueNumeric: 1
+              - column:
+                  name: record_date
+                  valueDate: 2024-07-02
+              - column:
+                  name: record_value
+                  valueNumeric: 89.75
+              - column:
+                  name: description
+                  value: Electricity reading after system upgrade
+              - column:
+                  name: record_category_id
+                  valueNumeric: 2
+              - column:
+                  name: unit_id
+                  valueNumeric: 2
