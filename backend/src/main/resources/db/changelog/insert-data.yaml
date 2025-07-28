@@ -50,7 +50,7 @@ databaseChangeLog:
                   value: art
               - column:
                   name: version
-                  valueNumeric: 2
+                  valueNumeric: 1
               - column:
                   name: record_category_name
                   value: Electricity household
@@ -68,7 +68,7 @@ databaseChangeLog:
                   value: art
               - column:
                   name: version
-                  valueNumeric: 3
+                  valueNumeric: 1
               - column:
                   name: record_category_name
                   value: Water

@@ -1,0 +1,10 @@
+### Create new Record Category
+POST http://localhost:8080/api/record-categories
+Content-Type: application/json
+
+{
+  "name": "Gesundheit",
+  "description": "Alles rund um Gesundheit"
+}
+
+<> 2025-07-22T181933.200.json
