@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: load-records
+      author: art
+      changes:
+        - loadData:
+            file: db/changelog/records.csv
+            tableName: records
+            separator: ","
+            encoding: UTF-8
+            columns:
+              - column:
+                  name: record_date
+                  type: DATE
+              - column:
+                  name: record_value
+                  type: NUMERIC
+              - column:
+                  name: record_category_id
+                  type: NUMERIC
+              - column:
+                  name: unit_id
+                  type: NUMERIC
+              - column:
+                  name: created_by
+                  type: STRING
+              - column:
+                  name: updated_by
+                  type: STRING
+              - column:
+                  name: version
+                  type: NUMERIC

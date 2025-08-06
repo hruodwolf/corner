@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/init-tables.yaml
+
+  - include:
+      file: db/changelog/insert-data.yaml
+
+  - include:
+      file: db/changelog/insert-records.yaml
