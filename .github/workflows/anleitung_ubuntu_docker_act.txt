@@ -1,0 +1,60 @@
+-- neues ubuntu installieren
+wsl --install -d Ubuntu-24.04 --name Ubuntu-24-Corner
+
+
+| Aufgabe              | Befehl                             |
+| -------------------- | ---------------------------------- |
+| Neue Instanz starten | `wsl -d Ubuntu-24-test`            |
+| Instanzen auflisten  | `wsl -l -v`                        |
+| Standard ändern      | `wsl --set-default Ubuntu-24-test` |
+| Instanz beenden      | `wsl --terminate Ubuntu-24-test`   |
+| Instanz löschen      | `wsl --unregister Ubuntu-24-test`  |
+
+-- docker engine installieren
+sudo apt update
+sudo apt install docker.io -y
+sudo usermod -aG docker $USER
+newgrp docker
+
+
+-- act manuell auf dem Ubuntu-Host installieren, nicht im Docker Container betreiben
+cd ~
+wget https://github.com/nektos/act/releases/download/v0.2.80/act_Linux_x86_64.tar.gz
+tar -xzf act_Linux_x86_64.tar.gz
+sudo mv act /usr/local/bin/
+chmod +x /usr/local/bin/act
+
+which act
+act --version
+
+act push
+
+oder mit deployment, Das sorgt dafür, dass docker run im Workflow direkt auf deinem Docker-Host ausgeführt wird (nicht in einem verschachtelten Container).
+
+act push --bind
+
+
+docker logs -f springboot-container
+
+
+
+
+Default image and other options can be changed manually in
+ /home/dev/.config/act/actrc (please refer to https://nektosact.com/usage/index.html?highlight=configur#configuration-file for additional information about file structure) Medium
+-->Medium
+
+-- ci.yml --
+name: WSL2 CI Example
+
+on: [push]
+
+jobs:
+  hello-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Say Hello
+        run: echo "Hello from act in Docker on WSL2!"
+

@@ -1,0 +1,28 @@
+name: Build and Run Spring Boot in Docker
+
+on: [push]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Java 17 and Maven
+        run: |
+          sudo apt update
+          sudo apt install -y openjdk-17-jdk maven
+
+      - name: Build Spring Boot with Maven
+        working-directory: ./backend
+        run: mvn clean package -DskipTests
+
+      - name: Build Docker Image
+        working-directory: ./backend
+        run: docker build -t springboot-app .
+
+      - name: Run Docker Container
+        run: |
+          docker run -d -p 8080:8080 --name springboot-container springboot-app
