@@ -79,6 +79,7 @@ public class RecordCategoryController {
     // 🔁 Mapping Entity → DTO
     private RecordCategoryDto toDto(RecordCategory entity) {
         RecordCategoryDto dto = new RecordCategoryDto();
+        dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
         return dto;

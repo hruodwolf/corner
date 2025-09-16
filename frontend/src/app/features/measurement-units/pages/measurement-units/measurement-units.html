@@ -1,0 +1,15 @@
+<h2>Measurement Units</h2>
+
+@if (loading()) {
+  <div>Lade Daten...</div>
+} @else if (error()) {
+  <div>{{ error()}}</div>
+} @else {
+  <ul>
+    @for (measurementUnit of measurementUnits(); track measurementUnit.id) {
+      <li>
+        {{ measurementUnit.nameEn }} - {{ measurementUnit.description }}
+      </li>
+    }
+  </ul>
+}

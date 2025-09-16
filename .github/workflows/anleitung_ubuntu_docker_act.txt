@@ -1,4 +1,4 @@
--- neues ubuntu installieren
+# neues ubuntu installieren
 wsl --install -d Ubuntu-24.04 --name Ubuntu-24-Corner
 
 
@@ -6,9 +6,9 @@ wsl --install -d Ubuntu-24.04 --name Ubuntu-24-Corner
 | -------------------- | ---------------------------------- |
 | Neue Instanz starten | `wsl -d Ubuntu-24-test`            |
 | Instanzen auflisten  | `wsl -l -v`                        |
-| Standard ändern      | `wsl --set-default Ubuntu-24-test` |
+| Standard ï¿½ndern      | `wsl --set-default Ubuntu-24-test` |
 | Instanz beenden      | `wsl --terminate Ubuntu-24-test`   |
-| Instanz löschen      | `wsl --unregister Ubuntu-24-test`  |
+| Instanz lï¿½schen      | `wsl --unregister Ubuntu-24-test`  |
 
 -- docker engine installieren
 sudo apt update
@@ -27,11 +27,21 @@ chmod +x /usr/local/bin/act
 which act
 act --version
 
+# ins Projektverzeichnis wechseln 
+cd /mnt/c/Daten/Projekte/Sandkasten/corner
+
+# alle jobs auflisten
+act -l 
+
+act <event>
+
+act example
+
 act push
 
-oder mit deployment, Das sorgt dafür, dass docker run im Workflow direkt auf deinem Docker-Host ausgeführt wird (nicht in einem verschachtelten Container).
-
+# oder mit deployment, das sorgt dafï¿½r, dass docker run im Workflow direkt auf deinem Docker-Host ausgefï¿½hrt wird (nicht in einem verschachtelten Container). NICHT WAHR!
 act push --bind
+
 
 
 docker logs -f springboot-container

@@ -1,0 +1,50 @@
+<p>record-form works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="record-form">
+  <mat-form-field appearance="fill">
+    <mat-label>Kategorie</mat-label>
+    <mat-select formControlName="recordCategoryId">
+      @for (cat of categories; track cat.id) {
+        <mat-option [value]="cat.id">
+          {{ cat.name }}
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Datum</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="recordDate" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Wert</mat-label>
+    <input matInput type="number" formControlName="recordValue" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Einheit</mat-label>
+    <mat-select formControlName="unitId">
+      @for (unit of units; track unit.id) {
+        <mat-option [value]="unit.id">
+          {{ unit.nameEn }} ({{ unit.symbol }})
+        </mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Beschreibung</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+
+
+
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    Speichern
+  </button>
+</form>
+
