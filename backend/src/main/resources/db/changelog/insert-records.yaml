@@ -11,22 +11,22 @@ databaseChangeLog:
             columns:
               - column:
                   name: record_date
-                  type: DATE
+                  type: date
               - column:
                   name: record_value
-                  type: NUMERIC
+                  type: numeric
               - column:
                   name: record_category_id
-                  type: NUMERIC
+                  type: numeric
               - column:
                   name: unit_id
-                  type: NUMERIC
+                  type: numeric
               - column:
                   name: created_by
-                  type: STRING
+                  type: string
               - column:
                   name: updated_by
-                  type: STRING
+                  type: string
               - column:
                   name: version
-                  type: NUMERIC
+                  type: numeric

@@ -3,7 +3,13 @@ databaseChangeLog:
       file: db/changelog/init-tables.yaml
 
   - include:
-      file: db/changelog/insert-data.yaml
+      file: db/changelog/insert-person.yaml
+
+  - include:
+      file: db/changelog/insert-record-categories.yaml
+
+  - include:
+      file: db/changelog/insert-measurement-units.yaml
 
   - include:
       file: db/changelog/insert-records.yaml

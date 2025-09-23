@@ -1,0 +1,4 @@
+CREATED_BY,UPDATED_BY,VERSION,RECORD_CATEGORY_NAME,DESCRIPTION
+init,init,1,Electricity heating,Power consumption of the heat pump
+init,init,1,Electricity household,Electricity consumed in the household
+init,init,1,Water,Water consumed in the household

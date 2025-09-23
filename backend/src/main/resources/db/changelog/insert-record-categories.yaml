@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-record-categories
+      author: init
+      changes:
+        - loadData:
+            file: db/changelog/record-categories.csv
+            tableName: record_categories
+            encoding: UTF-8
+            separator: ","
+            columns:
+              - column:
+                  name: created_by
+                  type: string
+              - column:
+                  name: updated_by
+                  type: string
+              - column:
+                  name: version
+                  type: numeric
+              - column:
+                  name: record_category_name
+                  type: string
+              - column:
+                  name: description
+                  type: string

@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-measurement-units
+      author: init
+      changes:
+        - loadData:
+            file: db/changelog/measurement-units.csv
+            tableName: measurement_units
+            encoding: UTF-8
+            separator: ","
+            columns:
+              - column:
+                  name: created_by
+                  type: string
+              - column:
+                  name: updated_by
+                  type: string
+              - column:
+                  name: version
+                  type: numeric
+              - column:
+                  name: name_en
+                  type: string
+              - column:
+                  name: symbol
+                  type: string
+              - column:
+                  name: quantity_type
+                  type: string
+              - column:
+                  name: description
+                  type: string

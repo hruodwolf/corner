@@ -38,6 +38,9 @@ ng generate interface core/models/records --type=model
 # add record service
 ng g s features/records/services/record
 
+# add record-form component
+ng generate component features/records/pages/add-record/components/record-form
+
 # create page record-categories
 ng generate component features/record-categories/pages/record-categories --standalone
 
