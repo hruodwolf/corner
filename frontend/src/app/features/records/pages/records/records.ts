@@ -50,13 +50,25 @@ export class Records implements OnInit  {
   readonly categories = signal<RecordCategory[]>([]);
   readonly selectedCategoryId = signal<number | null>(null);
 
+
+
   displayedColumns: string[] = ['recordCategoryName', 'recordDate', 'recordValue', 'unitName'];
 
   // Gefilterte Records
   readonly filteredRecords = computed(() => {
+    console.log('filterRec');
     const selected = this.selectedCategoryId();
     const records = this.recordService.records();
+    console.log(this.years());
     return selected ? records.filter(r => r.recordCategoryId === selected) : records;
+  });
+
+  // wird nur dann ausgeführt wenn oben console.log (this.year)
+  readonly years = computed(() => {
+    console.log('in years computed');
+    const years = [...new Set(this.recordService.records().map(r => r.recordDate.substring(0, 4)))];
+    console.log('Years computed:', years);
+    return years;
   });
 
   constructor(private recordService: RecordService, private categoryService: RecordCategoryService, private router: Router) { }
@@ -64,7 +76,6 @@ export class Records implements OnInit  {
   ngOnInit() {
     this.loading = this.recordService.loading;
     this.error = this.recordService.error;
-
     this.recordService.loadAll();
     this.categoryService.getAll().subscribe(data => this.categories.set(data));
   }
