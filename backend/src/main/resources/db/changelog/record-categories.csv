@@ -1,4 +1,5 @@
-CREATED_BY,UPDATED_BY,VERSION,RECORD_CATEGORY_NAME,DESCRIPTION
-init,init,1,Electricity heating,Power consumption of the heat pump
-init,init,1,Electricity household,Electricity consumed in the household
-init,init,1,Water,Water consumed in the household
+RECORD_CATEGORY_ID,CREATED_BY,UPDATED_BY,VERSION,RECORD_CATEGORY_NAME,DESCRIPTION
+1,init,init,1,Electricity heating,Power consumption of the heat pump
+2,init,init,1,Electricity household,Electricity consumed in the household
+3,init,init,1,Water household,Water consumed in the household
+4,init,init,1,Water well,Well water consumption

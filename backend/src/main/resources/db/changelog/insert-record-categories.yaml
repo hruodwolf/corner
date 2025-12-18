@@ -10,6 +10,9 @@ databaseChangeLog:
             separator: ","
             columns:
               - column:
+                  name: record_category_id
+                  type: numeric
+              - column:
                   name: created_by
                   type: string
               - column:
