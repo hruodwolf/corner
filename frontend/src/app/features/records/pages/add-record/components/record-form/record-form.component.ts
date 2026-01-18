@@ -84,4 +84,9 @@ export class RecordFormComponent implements OnInit {
       }
     });
   }
+
+  onCancel() {
+    void this.router.navigate(['/records']);
+  }
+
 }
