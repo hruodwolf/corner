@@ -1,14 +1,25 @@
 <mat-card>
-  <mat-card-title>📄 Records</mat-card-title>
-  <button mat-raised-button color="primary" (click)="onCreate()">Neu</button>
+  <mat-card-title>Records</mat-card-title>
+  <button mat-raised-button color="primary" (click)="onCreate()">New</button>
 
-  <!-- Kategorie-Filter -->
+  <!-- filter for category -->
   <mat-form-field appearance="outline" style=" margin-bottom: 1rem; margin-top: 1rem;">
-    <mat-label>Kategorie filtern</mat-label>
+    <mat-label>Categories</mat-label>
     <mat-select [value]="selectedCategoryId()" (valueChange)="selectedCategoryId.set($event)">
-      <mat-option [value]="null">Alle Kategorien</mat-option>
+      <mat-option [value]="null">All categories</mat-option>
       @for (cat of categories(); track cat.id) {
         <mat-option [value]="cat.id">{{ cat.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <!-- filter for years -->
+  <mat-form-field appearance="outline" style=" margin-bottom: 1rem; margin-top: 1rem;">
+    <mat-label>Years</mat-label>
+    <mat-select [value]="selectedYear()" (valueChange)="selectedYear.set($event)">
+      <mat-option [value]="null">All years</mat-option>
+      @for (year of years(); track year) {
+        <mat-option [value]="year">{{ year }}</mat-option>
       }
     </mat-select>
   </mat-form-field>
@@ -16,7 +27,7 @@
   @if (loading()) {
     <div class="loading-container">
       <mat-spinner></mat-spinner>
-      <p>Lade Daten...</p>
+      <p>load data...</p>
     </div>
   } @else if (error()) {
     <div class="error-message">
@@ -25,27 +36,27 @@
   } @else {
     <table mat-table [dataSource]="filteredRecords()" class="mat-elevation-z8" multiTemplateDataRows>
 
-      <!-- Kategorie -->
+      <!-- category -->
       <ng-container matColumnDef="recordCategoryName">
-        <th mat-header-cell *matHeaderCellDef>Kategorie</th>
+        <th mat-header-cell *matHeaderCellDef>Category</th>
         <td mat-cell *matCellDef="let record">{{ record.recordCategoryName }}</td>
       </ng-container>
 
-      <!-- Datum -->
+      <!-- Date -->
       <ng-container matColumnDef="recordDate">
-        <th mat-header-cell *matHeaderCellDef>Datum</th>
+        <th mat-header-cell *matHeaderCellDef>Date</th>
         <td mat-cell *matCellDef="let record">{{ record.recordDate | date: 'dd.MM.yyyy' }}</td>
       </ng-container>
 
-      <!-- Wert -->
+      <!-- Value -->
       <ng-container matColumnDef="recordValue">
-        <th mat-header-cell *matHeaderCellDef>Wert</th>
+        <th mat-header-cell *matHeaderCellDef>Value</th>
         <td mat-cell *matCellDef="let record">{{ record.recordValue }}</td>
       </ng-container>
 
-      <!-- Einheit -->
+      <!-- Unit -->
       <ng-container matColumnDef="unitName">
-        <th mat-header-cell *matHeaderCellDef>Einheit</th>
+        <th mat-header-cell *matHeaderCellDef>Unit</th>
         <td mat-cell *matCellDef="let record">{{ record.unitName }}</td>
       </ng-container>
 
