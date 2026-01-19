@@ -1,7 +1,9 @@
 package com.corner.backend.controller;
 
 import com.corner.backend.dto.RecordCategoryDto;
+import com.corner.backend.entity.MeasurementUnit;
 import com.corner.backend.entity.RecordCategory;
+import com.corner.backend.repository.MeasurementUnitRepository;
 import com.corner.backend.repository.RecordCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +19,13 @@ import java.util.stream.Collectors;
 public class RecordCategoryController {
 
     private final RecordCategoryRepository repository;
+    private final MeasurementUnitRepository unitRepo;
 
     @Autowired
-    public RecordCategoryController(RecordCategoryRepository repository) {
+    public RecordCategoryController(RecordCategoryRepository repository,
+                                    MeasurementUnitRepository unitRepo) {
         this.repository = repository;
+        this.unitRepo = unitRepo;
     }
 
     // 🟢 GET all categories → List of DTOs
@@ -43,8 +48,12 @@ public class RecordCategoryController {
     @PostMapping
     public RecordCategoryDto create(@RequestBody RecordCategoryDto dto) {
         RecordCategory entity = new RecordCategory();
+
+        MeasurementUnit unit = unitRepo.findById(dto.getUnitId())
+                .orElseThrow(() -> new RuntimeException("Unit not found"));
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
+        entity.setUnit(unit);
         entity.setCreatedBy("api");
         entity.setUpdatedBy("api");
         entity.setCreatedAt(LocalDateTime.now());
@@ -61,8 +70,12 @@ public class RecordCategoryController {
         RecordCategory entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("RecordCategory not found: " + id));
 
+        MeasurementUnit unit = unitRepo.findById(dto.getUnitId())
+                .orElseThrow(() -> new RuntimeException("Unit not found"));
+
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
+        entity.setUnit(unit);
         entity.setUpdatedBy("api");
         entity.setUpdatedAt(LocalDateTime.now());
 
@@ -82,6 +95,8 @@ public class RecordCategoryController {
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
+        dto.setUnitId(entity.getUnit().getId());
+        dto.setUnitName(entity.getUnit().getNameEn());
         return dto;
     }
 }

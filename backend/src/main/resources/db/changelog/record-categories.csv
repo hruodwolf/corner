@@ -1,6 +1,6 @@
-RECORD_CATEGORY_ID,CREATED_BY,UPDATED_BY,VERSION,RECORD_CATEGORY_NAME,DESCRIPTION
-1,init,init,1,Electricity heating,Power consumption of the heat pump
-2,init,init,1,Electricity household,Electricity consumed in the household
-3,init,init,1,Water household,Water consumed in the household
-4,init,init,1,Water well No. 736,Well water consumption
-5,init,init,1,Water well No. 737,Well water consumption
+RECORD_CATEGORY_ID,UNIT_ID,RECORD_CATEGORY_NAME,DESCRIPTION
+1,2,Electricity heating,Power consumption of the heat pump
+2,2,Electricity household,Electricity consumed in the household
+3,1,Water household,Water consumed in the household
+4,1,Water well No. 736,Well water consumption
+5,1,Water well No. 737,Well water consumption

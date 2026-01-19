@@ -7,6 +7,9 @@ public class RecordCategoryDto {
     private String name;
     private String description;
 
+    private Integer unitId;
+    private String unitName;
+
     // ----- Getter & Setter -----
 
     public String getName() {
@@ -28,4 +31,20 @@ public class RecordCategoryDto {
     public Integer getId() { return id; }
 
     public void setId(Integer id) { this.id = id; }
+
+    public Integer getUnitId() {
+        return unitId;
+    }
+
+    public void setUnitId(Integer unitId) {
+        this.unitId = unitId;
+    }
+
+    public String getUnitName() {
+        return unitName;
+    }
+
+    public void setUnitName(String unitName) {
+        this.unitName = unitName;
+    }
 }

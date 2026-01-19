@@ -10,13 +10,7 @@ databaseChangeLog:
             separator: ","
             columns:
               - column:
-                  name: created_by
-                  type: string
-              - column:
-                  name: updated_by
-                  type: string
-              - column:
-                  name: version
+                  name: unit_id
                   type: numeric
               - column:
                   name: name_en

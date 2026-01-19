@@ -19,41 +19,6 @@ databaseChangeLog:
                   name: last_name
                   type: VARCHAR(255)
         - createTable:
-            tableName: record_categories
-            columns:
-              - column:
-                  name: record_category_id
-                  type: INT
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-              - column:
-                  name: created_at
-                  type: TIMESTAMP
-                  defaultValueComputed: CURRENT_TIMESTAMP
-              - column:
-                  name: created_by
-                  type: VARCHAR(50)
-              - column:
-                  name: updated_at
-                  type: TIMESTAMP
-                  defaultValueComputed: CURRENT_TIMESTAMP
-              - column:
-                  name: updated_by
-                  type: VARCHAR(50)
-              - column:
-                  name: version
-                  type: INT
-                  defaultValueNumeric: 1
-              - column:
-                  name: record_category_name
-                  type: VARCHAR(100)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: description
-                  type: VARCHAR(255)
-        - createTable:
             tableName: measurement_units
             columns:
               - column:
@@ -71,6 +36,7 @@ databaseChangeLog:
               - column:
                   name: created_by
                   type: VARCHAR(50)
+                  defaultValue: 'Init'
                   remarks: User who created the record
               - column:
                   name: updated_at
@@ -80,6 +46,7 @@ databaseChangeLog:
               - column:
                   name: updated_by
                   type: VARCHAR(50)
+                  defaultValue: 'Init'
                   remarks: User who last updated the record
               - column:
                   name: version
@@ -108,6 +75,55 @@ databaseChangeLog:
                   name: description
                   type: TEXT
                   remarks: Optional description of the unit
+        - createTable:
+            tableName: record_categories
+            columns:
+              - column:
+                  name: record_category_id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: created_by
+                  type: VARCHAR(50)
+                  defaultValue: 'Init'
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_by
+                  type: VARCHAR(50)
+                  defaultValue: 'Init'
+              - column:
+                  name: version
+                  type: INT
+                  defaultValueNumeric: 1
+              - column:
+                  name: record_category_name
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: unit_id
+                  type: NUMBER
+                  constraints:
+                    nullable: false
+                  remarks: Foreign key reference to measurement_units table
+        - addForeignKeyConstraint:
+            baseTableName: record_categories
+            baseColumnNames: unit_id
+            constraintName: fk_measurement_units
+            referencedTableName: measurement_units
+            referencedColumnNames: unit_id
 
         - createTable:
             tableName: records
@@ -130,6 +146,7 @@ databaseChangeLog:
               - column:
                   name: created_by
                   type: VARCHAR2(50)
+                  defaultValue: 'Init'
                   remarks: User who created the record
 
               - column:
@@ -141,6 +158,7 @@ databaseChangeLog:
               - column:
                   name: updated_by
                   type: VARCHAR2(50)
+                  defaultValue: 'Init'
                   remarks: User who last updated the record
 
               - column:
@@ -175,24 +193,9 @@ databaseChangeLog:
                     nullable: false
                   remarks: Foreign key reference to record_categories table
 
-              - column:
-                  name: unit_id
-                  type: NUMBER
-                  constraints:
-                    nullable: false
-                  remarks: Foreign key reference to measurement_units table
-
         - addForeignKeyConstraint:
             baseTableName: records
             baseColumnNames: record_category_id
             constraintName: fk_record_category
             referencedTableName: record_categories
             referencedColumnNames: record_category_id
-
-        - addForeignKeyConstraint:
-            baseTableName: records
-            baseColumnNames: unit_id
-            constraintName: fk_measurement_units
-            referencedTableName: measurement_units
-            referencedColumnNames: unit_id
-

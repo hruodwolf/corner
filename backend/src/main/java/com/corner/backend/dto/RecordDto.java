@@ -13,8 +13,7 @@ public class RecordDto {
     private Integer recordCategoryId;
     private String recordCategoryName;
 
-    private Integer unitId;
-    private String unitName;
+
 
     private String createdBy;
     private String updatedBy;
@@ -67,22 +66,6 @@ public class RecordDto {
 
     public void setRecordCategoryName(String recordCategoryName) {
         this.recordCategoryName = recordCategoryName;
-    }
-
-    public Integer getUnitId() {
-        return unitId;
-    }
-
-    public void setUnitId(Integer unitId) {
-        this.unitId = unitId;
-    }
-
-    public String getUnitName() {
-        return unitName;
-    }
-
-    public void setUnitName(String unitName) {
-        this.unitName = unitName;
     }
 
     public String getCreatedBy() {

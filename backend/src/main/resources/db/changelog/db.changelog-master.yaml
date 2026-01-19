@@ -6,10 +6,10 @@ databaseChangeLog:
       file: db/changelog/insert-person.yaml
 
   - include:
-      file: db/changelog/insert-record-categories.yaml
+      file: db/changelog/insert-measurement-units.yaml
 
   - include:
-      file: db/changelog/insert-measurement-units.yaml
+      file: db/changelog/insert-record-categories.yaml
 
   - include:
       file: db/changelog/insert-records.yaml

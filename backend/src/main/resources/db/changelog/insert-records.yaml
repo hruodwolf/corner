@@ -18,15 +18,3 @@ databaseChangeLog:
               - column:
                   name: record_category_id
                   type: numeric
-              - column:
-                  name: unit_id
-                  type: numeric
-              - column:
-                  name: created_by
-                  type: string
-              - column:
-                  name: updated_by
-                  type: string
-              - column:
-                  name: version
-                  type: numeric

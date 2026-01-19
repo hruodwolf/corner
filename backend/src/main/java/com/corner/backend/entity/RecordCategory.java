@@ -20,6 +20,10 @@ public class RecordCategory {
     @Column(name = "description", length = 255)
     private String description;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "unit_id", nullable = false)
+    private MeasurementUnit unit;
+
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
@@ -99,5 +103,13 @@ public class RecordCategory {
 
     public void setVersion(Integer version) {
         this.version = version;
+    }
+
+    public MeasurementUnit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(MeasurementUnit unit) {
+        this.unit = unit;
     }
 }

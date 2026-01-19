@@ -2,10 +2,10 @@ package com.corner.backend.controller;
 
 
 import com.corner.backend.dto.RecordDto;
-import com.corner.backend.entity.MeasurementUnit;
+
 import com.corner.backend.entity.Record;
 import com.corner.backend.entity.RecordCategory;
-import com.corner.backend.repository.MeasurementUnitRepository;
+
 import com.corner.backend.repository.RecordCategoryRepository;
 import com.corner.backend.repository.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +21,16 @@ public class RecordController {
 
     private final RecordRepository recordRepo;
     private final RecordCategoryRepository categoryRepo;
-    private final MeasurementUnitRepository unitRepo;
+
 
     @Autowired
     public RecordController(
             RecordRepository recordRepo,
-            RecordCategoryRepository categoryRepo,
-            MeasurementUnitRepository unitRepo
+            RecordCategoryRepository categoryRepo
     ) {
         this.recordRepo = recordRepo;
         this.categoryRepo = categoryRepo;
-        this.unitRepo = unitRepo;
+
     }
 
     // 🟢 GET all
@@ -55,16 +54,11 @@ public class RecordController {
     public RecordDto create(@RequestBody RecordDto dto) {
         RecordCategory category = categoryRepo.findById(dto.getRecordCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
-
-        MeasurementUnit unit = unitRepo.findById(dto.getUnitId())
-                .orElseThrow(() -> new RuntimeException("Unit not found"));
-
         Record entity = new Record();
         entity.setRecordDate(dto.getRecordDate());
         entity.setRecordValue(dto.getRecordValue());
         entity.setDescription(dto.getDescription());
         entity.setRecordCategory(category);
-        entity.setUnit(unit);
 
         entity.setCreatedAt(LocalDateTime.now());
         entity.setUpdatedAt(LocalDateTime.now());
@@ -85,14 +79,10 @@ public class RecordController {
         RecordCategory category = categoryRepo.findById(dto.getRecordCategoryId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
-        MeasurementUnit unit = unitRepo.findById(dto.getUnitId())
-                .orElseThrow(() -> new RuntimeException("Unit not found"));
-
         record.setRecordDate(dto.getRecordDate());
         record.setRecordValue(dto.getRecordValue());
         record.setDescription(dto.getDescription());
         record.setRecordCategory(category);
-        record.setUnit(unit);
         record.setUpdatedAt(LocalDateTime.now());
         record.setUpdatedBy("api");
 
@@ -116,9 +106,6 @@ public class RecordController {
 
         dto.setRecordCategoryId(entity.getRecordCategory().getId());
         dto.setRecordCategoryName(entity.getRecordCategory().getName());
-
-        dto.setUnitId(entity.getUnit().getId());
-        dto.setUnitName(entity.getUnit().getNameEn());
 
         dto.setCreatedBy(entity.getCreatedBy());
         dto.setUpdatedBy(entity.getUpdatedBy());

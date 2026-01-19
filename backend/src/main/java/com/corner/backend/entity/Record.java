@@ -25,10 +25,6 @@ public class Record {
     @JoinColumn(name = "record_category_id", nullable = false)
     private RecordCategory recordCategory;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "unit_id", nullable = false)
-    private MeasurementUnit unit;
-
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
@@ -82,14 +78,6 @@ public class Record {
 
     public void setRecordCategory(RecordCategory recordCategory) {
         this.recordCategory = recordCategory;
-    }
-
-    public MeasurementUnit getUnit() {
-        return unit;
-    }
-
-    public void setUnit(MeasurementUnit unit) {
-        this.unit = unit;
     }
 
     public LocalDateTime getCreatedAt() {
