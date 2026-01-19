@@ -6,6 +6,7 @@ import com.corner.backend.dto.RecordDto;
 import com.corner.backend.entity.Record;
 import com.corner.backend.entity.RecordCategory;
 
+import com.corner.backend.mapper.RecordMapper;
 import com.corner.backend.repository.RecordCategoryRepository;
 import com.corner.backend.repository.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,23 +22,25 @@ public class RecordController {
 
     private final RecordRepository recordRepo;
     private final RecordCategoryRepository categoryRepo;
+    private final RecordMapper recordMapper;
 
 
     @Autowired
     public RecordController(
             RecordRepository recordRepo,
-            RecordCategoryRepository categoryRepo
+            RecordCategoryRepository categoryRepo,
+            RecordMapper recordMapper
     ) {
         this.recordRepo = recordRepo;
         this.categoryRepo = categoryRepo;
-
+        this.recordMapper = recordMapper;
     }
 
     // 🟢 GET all
     @GetMapping
     public List<RecordDto> getAll() {
         return recordRepo.findAll().stream()
-                .map(this::toDto)
+                .map(recordMapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -46,19 +49,15 @@ public class RecordController {
     public RecordDto getById(@PathVariable Integer id) {
         Record record = recordRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Record not found: " + id));
-        return toDto(record);
+        return recordMapper.toDto(record);
     }
 
     // 🟡 POST
     @PostMapping
     public RecordDto create(@RequestBody RecordDto dto) {
-        RecordCategory category = categoryRepo.findById(dto.getRecordCategoryId())
+        RecordCategory category = categoryRepo.findById(dto.getRecordCategory().getId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
-        Record entity = new Record();
-        entity.setRecordDate(dto.getRecordDate());
-        entity.setRecordValue(dto.getRecordValue());
-        entity.setDescription(dto.getDescription());
-        entity.setRecordCategory(category);
+        Record entity = recordMapper.toEntity(dto);
 
         entity.setCreatedAt(LocalDateTime.now());
         entity.setUpdatedAt(LocalDateTime.now());
@@ -67,7 +66,7 @@ public class RecordController {
         entity.setVersion(1);
 
         Record saved = recordRepo.save(entity);
-        return toDto(saved);
+        return recordMapper.toDto(saved);
     }
 
     // 🟠 PUT
@@ -76,7 +75,7 @@ public class RecordController {
         Record record = recordRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Record not found"));
 
-        RecordCategory category = categoryRepo.findById(dto.getRecordCategoryId())
+        RecordCategory category = categoryRepo.findById(dto.getRecordCategory().getId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
 
         record.setRecordDate(dto.getRecordDate());
@@ -87,29 +86,12 @@ public class RecordController {
         record.setUpdatedBy("api");
 
         Record updated = recordRepo.save(record);
-        return toDto(updated);
+        return recordMapper.toDto(updated);
     }
 
     // 🔴 DELETE
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         recordRepo.deleteById(id);
-    }
-
-    // 🔁 Entity → DTO
-    private RecordDto toDto(Record entity) {
-        RecordDto dto = new RecordDto();
-        dto.setId(entity.getId());
-        dto.setRecordDate(entity.getRecordDate());
-        dto.setRecordValue(entity.getRecordValue());
-        dto.setDescription(entity.getDescription());
-
-        dto.setRecordCategoryId(entity.getRecordCategory().getId());
-        dto.setRecordCategoryName(entity.getRecordCategory().getName());
-
-        dto.setCreatedBy(entity.getCreatedBy());
-        dto.setUpdatedBy(entity.getUpdatedBy());
-
-        return dto;
     }
 }

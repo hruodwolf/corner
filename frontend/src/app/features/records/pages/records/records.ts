@@ -60,7 +60,9 @@ export class Records implements OnInit  {
     const records = this.recordService.records();
 
     let tempRecords = selectedCat ? records
-          .filter(r => r.recordCategoryId === selectedCat) : records;
+          .filter(r => {
+            return r.recordCategory.id === selectedCat;
+          }) : records;
 
     tempRecords = selectedYear ? tempRecords
       .filter(r => new Date(r.recordDate).getFullYear() === selectedYear) : tempRecords;

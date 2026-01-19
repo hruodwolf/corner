@@ -1,6 +1,8 @@
 package com.corner.backend.dto;
 
 
+import java.time.LocalDateTime;
+
 public class MeasurementUnitDto {
 
     private Integer id;
@@ -9,7 +11,11 @@ public class MeasurementUnitDto {
     private String quantityType;
     private String description;
     private String createdBy;
+    private LocalDateTime createdAt;
     private String updatedBy;
+    private LocalDateTime updatedAt;
+
+
 
     public MeasurementUnitDto() {
     }
@@ -68,5 +74,21 @@ public class MeasurementUnitDto {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

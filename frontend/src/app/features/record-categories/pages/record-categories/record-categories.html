@@ -8,7 +8,7 @@
   <ul>
     @for (category of categories(); track category.id) {
       <li>
-        {{ category.name }} - {{ category.description }}
+        {{ category.name }} - {{ category.description }} - {{ category.measurementUnit.nameEn }}
       </li>
     }
   </ul>

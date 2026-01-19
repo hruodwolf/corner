@@ -39,7 +39,7 @@
       <!-- category -->
       <ng-container matColumnDef="recordCategoryName">
         <th mat-header-cell *matHeaderCellDef>Category</th>
-        <td mat-cell *matCellDef="let record">{{ record.recordCategoryName }}</td>
+        <td mat-cell *matCellDef="let record">{{ record.recordCategory.name }}</td>
       </ng-container>
 
       <!-- Date -->
@@ -57,7 +57,7 @@
       <!-- Unit -->
       <ng-container matColumnDef="unitName">
         <th mat-header-cell *matHeaderCellDef>Unit</th>
-        <td mat-cell *matCellDef="let record">{{ record.unitName }}</td>
+        <td mat-cell *matCellDef="let record">{{ record.recordCategory.measurementUnit.nameEn }}</td>
       </ng-container>
 
       <!-- Header & Rows -->

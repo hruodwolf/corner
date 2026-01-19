@@ -1,8 +1,10 @@
 package com.corner.backend.controller;
 
+import com.corner.backend.dto.MeasurementUnitDto;
 import com.corner.backend.dto.RecordCategoryDto;
 import com.corner.backend.entity.MeasurementUnit;
 import com.corner.backend.entity.RecordCategory;
+import com.corner.backend.mapper.RecordCategoryMapper;
 import com.corner.backend.repository.MeasurementUnitRepository;
 import com.corner.backend.repository.RecordCategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +22,22 @@ public class RecordCategoryController {
 
     private final RecordCategoryRepository repository;
     private final MeasurementUnitRepository unitRepo;
+    private final RecordCategoryMapper mapper;
 
     @Autowired
     public RecordCategoryController(RecordCategoryRepository repository,
-                                    MeasurementUnitRepository unitRepo) {
+                                    MeasurementUnitRepository unitRepo,
+                                    RecordCategoryMapper mapper) {
         this.repository = repository;
         this.unitRepo = unitRepo;
+        this.mapper = mapper;
     }
 
     // 🟢 GET all categories → List of DTOs
     @GetMapping
     public List<RecordCategoryDto> getAll() {
         return repository.findAll().stream()
-                .map(this::toDto)
+                .map(mapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -41,19 +46,17 @@ public class RecordCategoryController {
     public RecordCategoryDto getById(@PathVariable Integer id) {
         RecordCategory entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("RecordCategory not found: " + id));
-        return toDto(entity);
+        return mapper.toDto(entity);
     }
 
     // 🟡 POST new → DTO
     @PostMapping
     public RecordCategoryDto create(@RequestBody RecordCategoryDto dto) {
-        RecordCategory entity = new RecordCategory();
+        RecordCategory entity = mapper.toEntity(dto);
 
-        MeasurementUnit unit = unitRepo.findById(dto.getUnitId())
+        MeasurementUnit unit = unitRepo.findById(dto.getMeasurementUnit().getId())
                 .orElseThrow(() -> new RuntimeException("Unit not found"));
-        entity.setName(dto.getName());
-        entity.setDescription(dto.getDescription());
-        entity.setUnit(unit);
+
         entity.setCreatedBy("api");
         entity.setUpdatedBy("api");
         entity.setCreatedAt(LocalDateTime.now());
@@ -61,7 +64,7 @@ public class RecordCategoryController {
         entity.setVersion(1);
 
         RecordCategory saved = repository.save(entity);
-        return toDto(saved);
+        return mapper.toDto(saved);
     }
 
     // 🟠 PUT update → DTO
@@ -70,33 +73,22 @@ public class RecordCategoryController {
         RecordCategory entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("RecordCategory not found: " + id));
 
-        MeasurementUnit unit = unitRepo.findById(dto.getUnitId())
+        MeasurementUnit unit = unitRepo.findById(dto.getMeasurementUnit().getId())
                 .orElseThrow(() -> new RuntimeException("Unit not found"));
 
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
-        entity.setUnit(unit);
+        entity.setMeasurementUnit(unit);
         entity.setUpdatedBy("api");
         entity.setUpdatedAt(LocalDateTime.now());
 
         RecordCategory updated = repository.save(entity);
-        return toDto(updated);
+        return mapper.toDto(updated);
     }
 
     // 🔴 DELETE
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         repository.deleteById(id);
-    }
-
-    // 🔁 Mapping Entity → DTO
-    private RecordCategoryDto toDto(RecordCategory entity) {
-        RecordCategoryDto dto = new RecordCategoryDto();
-        dto.setId(entity.getId());
-        dto.setName(entity.getName());
-        dto.setDescription(entity.getDescription());
-        dto.setUnitId(entity.getUnit().getId());
-        dto.setUnitName(entity.getUnit().getNameEn());
-        return dto;
     }
 }

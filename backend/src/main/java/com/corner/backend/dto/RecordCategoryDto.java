@@ -1,16 +1,19 @@
 package com.corner.backend.dto;
 
 
+import java.time.LocalDateTime;
+
 public class RecordCategoryDto {
 
     private Integer id;
     private String name;
     private String description;
+    private MeasurementUnitDto measurementUnit;
+    private String createdBy;
+    private LocalDateTime createdAt;
+    private String updatedBy;
+    private LocalDateTime updatedAt;
 
-    private Integer unitId;
-    private String unitName;
-
-    // ----- Getter & Setter -----
 
     public String getName() {
         return name;
@@ -32,19 +35,43 @@ public class RecordCategoryDto {
 
     public void setId(Integer id) { this.id = id; }
 
-    public Integer getUnitId() {
-        return unitId;
+    public MeasurementUnitDto getMeasurementUnit() {
+        return measurementUnit;
     }
 
-    public void setUnitId(Integer unitId) {
-        this.unitId = unitId;
+    public void setMeasurementUnit(MeasurementUnitDto measurementUnit) {
+        this.measurementUnit = measurementUnit;
     }
 
-    public String getUnitName() {
-        return unitName;
+    public String getCreatedBy() {
+        return createdBy;
     }
 
-    public void setUnitName(String unitName) {
-        this.unitName = unitName;
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

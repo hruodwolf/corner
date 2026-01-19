@@ -3,6 +3,7 @@ package com.corner.backend.controller;
 
 import com.corner.backend.dto.MeasurementUnitDto;
 import com.corner.backend.entity.MeasurementUnit;
+import com.corner.backend.mapper.MeasurementUnitMapper;
 import com.corner.backend.repository.MeasurementUnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,17 +17,19 @@ import java.util.stream.Collectors;
 public class MeasurementUnitController {
 
     private final MeasurementUnitRepository repository;
+    private final MeasurementUnitMapper mapper;
 
     @Autowired
     public MeasurementUnitController(MeasurementUnitRepository repository) {
         this.repository = repository;
+        this.mapper = new MeasurementUnitMapper();
     }
 
     // 🟢 GET all → list of DTOs
     @GetMapping
     public List<MeasurementUnitDto> getAll() {
         return repository.findAll().stream()
-                .map(this::toDto)
+                .map(mapper::toDto)
                 .collect(Collectors.toList());
     }
 
@@ -35,7 +38,7 @@ public class MeasurementUnitController {
     public MeasurementUnitDto getById(@PathVariable Integer id) {
         MeasurementUnit entity = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("MeasurementUnit not found: " + id));
-        return toDto(entity);
+        return mapper.toDto(entity);
     }
 
     // 🟡 POST new → DTO
@@ -54,7 +57,7 @@ public class MeasurementUnitController {
         entity.setVersion(1);
 
         MeasurementUnit saved = repository.save(entity);
-        return toDto(saved);
+        return mapper.toDto(saved);
     }
 
     // 🟠 PUT update → DTO
@@ -71,7 +74,7 @@ public class MeasurementUnitController {
         entity.setUpdatedAt(LocalDateTime.now());
 
         MeasurementUnit updated = repository.save(entity);
-        return toDto(updated);
+        return mapper.toDto(updated);
     }
 
     // 🔴 DELETE
@@ -80,14 +83,5 @@ public class MeasurementUnitController {
         repository.deleteById(id);
     }
 
-    // 🔁 Mapping Entity → DTO
-    private MeasurementUnitDto toDto(MeasurementUnit entity) {
-        MeasurementUnitDto dto = new MeasurementUnitDto();
-        dto.setId(entity.getId());
-        dto.setNameEn(entity.getNameEn());
-        dto.setSymbol(entity.getSymbol());
-        dto.setQuantityType(entity.getQuantityType());
-        dto.setDescription(entity.getDescription());
-        return dto;
-    }
+
 }

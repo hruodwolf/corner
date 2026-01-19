@@ -10,15 +10,14 @@ public class RecordDto {
     private Double recordValue;
     private String description;
 
-    private Integer recordCategoryId;
-    private String recordCategoryName;
-
-
+    private RecordCategoryDto recordCategory;
 
     private String createdBy;
+    private LocalDateTime createdAt;
     private String updatedBy;
+    private LocalDateTime updatedAt;
 
-    // Getter & Setter
+
 
     public Integer getId() {
         return id;
@@ -52,22 +51,6 @@ public class RecordDto {
         this.description = description;
     }
 
-    public Integer getRecordCategoryId() {
-        return recordCategoryId;
-    }
-
-    public void setRecordCategoryId(Integer recordCategoryId) {
-        this.recordCategoryId = recordCategoryId;
-    }
-
-    public String getRecordCategoryName() {
-        return recordCategoryName;
-    }
-
-    public void setRecordCategoryName(String recordCategoryName) {
-        this.recordCategoryName = recordCategoryName;
-    }
-
     public String getCreatedBy() {
         return createdBy;
     }
@@ -82,6 +65,30 @@ public class RecordDto {
 
     public void setUpdatedBy(String updatedBy) {
         this.updatedBy = updatedBy;
+    }
+
+    public RecordCategoryDto getRecordCategory() {
+        return recordCategory;
+    }
+
+    public void setRecordCategory(RecordCategoryDto recordCategory) {
+        this.recordCategory = recordCategory;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
 
