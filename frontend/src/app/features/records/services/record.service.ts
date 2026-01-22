@@ -1,7 +1,6 @@
 import {Injectable, signal} from '@angular/core';
 import {Record} from '../../../core/models/record.model';
 import {HttpClient} from '@angular/common/http';
-import {RecordDto} from '../../../core/models/record.dto';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -34,7 +33,7 @@ export class RecordService {
     });
   }
 
-  create(dto: Partial<RecordDto>): Observable<RecordDto> {
-    return this.http.post<RecordDto>(this.apiUrl, dto);
+  create(dto: Partial<Record>): Observable<Record> {
+    return this.http.post<Record>(this.apiUrl, dto);
   }
 }

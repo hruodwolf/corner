@@ -55,10 +55,11 @@ public class RecordController {
     // 🟡 POST
     @PostMapping
     public RecordDto create(@RequestBody RecordDto dto) {
+        // is this necessary or keep for validation?
         RecordCategory category = categoryRepo.findById(dto.getRecordCategory().getId())
                 .orElseThrow(() -> new RuntimeException("Category not found"));
         Record entity = recordMapper.toEntity(dto);
-
+        //entity.setRecordCategory(category); // not necessary
         entity.setCreatedAt(LocalDateTime.now());
         entity.setUpdatedAt(LocalDateTime.now());
         entity.setCreatedBy("api");

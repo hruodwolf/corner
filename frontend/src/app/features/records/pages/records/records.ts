@@ -55,6 +55,7 @@ export class Records implements OnInit  {
   displayedColumns: string[] = ['recordCategoryName', 'recordDate', 'recordValue', 'unitName'];
 
   readonly filteredRecords = computed(() => {
+    console.log('readonly filteredRecords');
     const selectedCat = this.selectedCategoryId();
     const selectedYear = this.selectedYear();
     const records = this.recordService.records();
@@ -71,6 +72,7 @@ export class Records implements OnInit  {
   });
 
   readonly years = computed(() => {
+    console.log('readonly years');
     return [...new Set(
       this.recordService.records()
         .map(r => new Date(r.recordDate).getFullYear())
@@ -78,9 +80,12 @@ export class Records implements OnInit  {
     )].sort((a, b) => b - a);
   });
 
-  constructor(private recordService: RecordService, private categoryService: RecordCategoryService, private router: Router) { }
+  constructor(private recordService: RecordService, private categoryService: RecordCategoryService, private router: Router) {
+    console.log('constructor');
+  }
 
   ngOnInit() {
+    console.log('ngOnInit');
     this.loading = this.recordService.loading;
     this.error = this.recordService.error;
     this.recordService.loadAll();

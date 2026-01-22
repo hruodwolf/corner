@@ -2,9 +2,9 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="record-form">
   <mat-form-field appearance="fill">
     <mat-label>Category</mat-label>
-    <mat-select formControlName="recordCategoryId">
+    <mat-select formControlName="recordCategory">
       @for (cat of categories; track cat.id) {
-        <mat-option [value]="cat.id">
+        <mat-option [value]="cat">
           {{ cat.name }}
         </mat-option>
       }
@@ -23,6 +23,7 @@
     <input matInput type="number" formControlName="recordValue" />
   </mat-form-field>
 
+  <!--
   <mat-form-field appearance="fill">
     <mat-label>Unit</mat-label>
     <mat-select formControlName="unitId">
@@ -33,6 +34,7 @@
       }
     </mat-select>
   </mat-form-field>
+  -->
 
   <mat-form-field appearance="fill">
     <mat-label>Description</mat-label>
