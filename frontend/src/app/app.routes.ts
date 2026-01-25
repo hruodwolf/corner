@@ -34,6 +34,13 @@ export const routes: Routes = [
         (m) => m.MeasurementUnits
       ),
   },
+  {
+    path: 'measurement-units-asyncpipe',
+    loadComponent: () =>
+      import('./features/measurement-units/pages/measurement-units-asyncpipe/measurement-units-asyncpipe').then(
+        (m) => m.MeasurementUnitsAsyncpipe
+      ),
+  },
 
 ];
 

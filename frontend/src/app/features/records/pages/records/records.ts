@@ -54,6 +54,7 @@ export class Records implements OnInit  {
 
   displayedColumns: string[] = ['recordCategoryName', 'recordDate', 'recordValue', 'unitName'];
 
+  //FIXME Shouldn't this signal variable be managed within service?
   readonly filteredRecords = computed(() => {
     console.log('readonly filteredRecords');
     const selectedCat = this.selectedCategoryId();

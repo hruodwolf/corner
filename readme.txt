@@ -60,6 +60,9 @@ ng g s features/measurement-units/services/measurement-unit
 # create model
 ng generate interface core/models/measurement-unit --type=model
 
+# dry-run and skip-tests
+ng g c features/measurement-units/pages/measurement-units-asyncpipe --dry-run --skip-tests=true
+
 
 # reinstall dependencies
 rm -rf node_modules
