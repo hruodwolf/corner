@@ -1,0 +1,17 @@
+<p>record-list works!</p>
+@if(vm.isLoading$ | async) {
+<section>
+  Loading...
+</section>
+} @else {
+<ul>
+  @for (item of (vm.items$ | async); track item.id) {
+  <li>
+    {{ item.id }} - {{ item.date }} - {{ item.value }}
+  </li>
+  }
+</ul>
+}
+<button (click)="vm.refresh()">
+  Refresh
+</button>

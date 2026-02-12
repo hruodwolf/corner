@@ -1,0 +1,8 @@
+<p>measurement-units-subscribe works!</p>
+
+<div *ngIf="measurementUnits as units">
+<p>Example: {{units[0].nameEn}}</p>
+  <ul>
+    <li *ngFor="let unit of units">{{unit.id}} - {{unit.nameEn}}</li>
+  </ul>
+</div>

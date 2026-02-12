@@ -1,4 +1,4 @@
-import {Component, OnInit, Signal} from '@angular/core';
+import {Component, inject, OnInit, Signal} from '@angular/core';
 import {MeasurementUnit} from '../../../../core/models/measurement-unit.model';
 import {MeasurementUnitService} from '../../services/measurement-unit.service';
 
@@ -13,7 +13,7 @@ export class MeasurementUnits implements OnInit{
   loading!: Signal<boolean>;
   error!: Signal<string | null>;
 
-  constructor(private measurementUnitService: MeasurementUnitService) { }
+  private measurementUnitService = inject(MeasurementUnitService);
 
   ngOnInit() {
     this.measurementUnits = this.measurementUnitService.measurementUnits;

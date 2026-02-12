@@ -37,4 +37,18 @@ export class MeasurementUnitService {
   getAll(): Observable<MeasurementUnit[]> {
     return this.http.get<MeasurementUnit[]>(this.apiUrl);
   }
+
+  loadMeasurementUnits(): Promise<MeasurementUnit[]> {
+    return new Promise((resolve, reject) => {
+      this.getAll().subscribe({
+        next: (data) => {
+          resolve(data);
+        },
+        error: (err) => {
+          console.error('error', err);
+          reject(err);
+        }
+      })
+    });
+  }
 }

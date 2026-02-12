@@ -2,6 +2,7 @@ import {Injectable, signal} from '@angular/core';
 import {Record} from '../../../core/models/record.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {Records} from '../pages/records/records';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,10 @@ export class RecordService {
         console.log(err);
       }
     });
+  }
+
+  getRecords(): Observable<Record[]> {
+    return this.http.get<Record[]>(this.apiUrl);
   }
 
   create(dto: Partial<Record>): Observable<Record> {

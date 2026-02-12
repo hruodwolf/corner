@@ -41,6 +41,25 @@ export const routes: Routes = [
         (m) => m.MeasurementUnitsAsyncpipe
       ),
   },
+  {
+    path: 'measurement-units-subscribe',
+    loadComponent: () =>
+      import('./features/measurement-units/pages/measurement-units-subscribe/measurement-units-subscribe').then(
+        (m) => m.MeasurementUnitsSubscribe
+      ),
+  },
+  {
+    path: 'measurement-units-asyncawait',
+    loadComponent: () =>
+      import('./features/measurement-units/pages/measurement-units-asyncawait/measurement-units-asyncawait').then(
+        (m) => m.MeasurementUnitsAsyncawait
+      ),
+  },  {
+    path: 'record-list',
+    loadComponent: () =>
+      import('./features/records/pages/record-list/record-list').then(
+        (m) => m.RecordList
+      ),
+  },
 
 ];
-

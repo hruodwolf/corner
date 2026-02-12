@@ -24,7 +24,4 @@ export class MeasurementUnitsAsyncpipe implements OnInit {
   ngOnInit(): void {
     this.measurementUnitsObs = this.measurementUnitService.getAll();
   }
-
-
-
 }
