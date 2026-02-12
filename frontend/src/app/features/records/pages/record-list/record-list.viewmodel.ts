@@ -1,5 +1,5 @@
 import {inject, Injectable} from '@angular/core';
-import {BehaviorSubject, map, Observable} from 'rxjs';
+import {BehaviorSubject, combineLatest, map, Observable} from 'rxjs';
 import {Record} from '../../../../core/models/record.model'
 import {RecordService} from '../../services/record.service';
 
@@ -13,7 +13,7 @@ export class RecordListViewModel {
   private readonly recordsSubject = new BehaviorSubject<Record[]>([]);
   readonly records$ = this.recordsSubject.asObservable();
 
-  readonly items$ = this.records$.pipe(
+  private readonly items$ = this.records$.pipe(
     map((records: Record[]) =>
       records.map(r => ({
         id: r.id,
@@ -23,6 +23,17 @@ export class RecordListViewModel {
   );
 
   readonly isLoading$ = new BehaviorSubject<boolean>(false);
+
+  vm$ = combineLatest([
+    this.items$,
+    this.isLoading$
+  ]).pipe(
+    map(([items, isLoading]) => ({
+      items,
+      isLoading
+    }))
+  );
+
 
 
   load(): void {
