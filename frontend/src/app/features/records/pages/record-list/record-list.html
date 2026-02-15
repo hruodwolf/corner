@@ -1,4 +1,19 @@
-<p>record-list works!</p>
+<p>with two subscribes</p>
+@if(vm.isLoading$ | async) {
+  <section>
+    Loading...
+  </section>
+} @else {
+  <ul>
+    @for (item of (vm.items$ | async); track item.id) {
+      <li>
+        {{ item.id }} - {{ item.date }} - {{ item.value }}
+      </li>
+    }
+  </ul>
+}
+
+<p>with one subscribe and combineLatest</p>
 @if (vm.vm$ | async; as vm) {
 
   @if (vm.isLoading) {
