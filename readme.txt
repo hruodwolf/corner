@@ -10,6 +10,9 @@ rm frontend
 
 npm install -g @angular/cli
 
+npm install @ngrx/signals@20
+npm audit
+
 ng version
 
 # create project with standalone structure
