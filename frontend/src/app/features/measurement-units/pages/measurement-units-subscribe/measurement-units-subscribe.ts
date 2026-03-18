@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {MeasurementUnitService} from '../../services/measurement-unit.service';
 import {MeasurementUnit} from '../../../../core/models/measurement-unit.model';
 import {NgFor, NgIf} from '@angular/common';
@@ -10,19 +10,24 @@ import {NgFor, NgIf} from '@angular/common';
     NgFor
   ],
   templateUrl: './measurement-units-subscribe.html',
-  styleUrl: './measurement-units-subscribe.css'
+  styleUrl: './measurement-units-subscribe.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MeasurementUnitsSubscribe implements OnInit{
 
   measurementUnits!: MeasurementUnit[];
 
-  constructor(private measurementUnitService: MeasurementUnitService) { }
+  showNumber!: number;
+
+  constructor(private measurementUnitService: MeasurementUnitService,
+              private cd: ChangeDetectorRef) { }
 
   ngOnInit(){
     this.measurementUnitService.getAll().subscribe({
       next: (data) => {
-        console.log('next');
+        console.log('next' + JSON.stringify(data));
         this.measurementUnits = data;
+        this.cd.markForCheck(); //due to zoneless, update the view
       },
       complete: () =>{
         console.log('complete');
@@ -31,5 +36,17 @@ export class MeasurementUnitsSubscribe implements OnInit{
         console.log('error' + err);
       }
     })
+  }
+
+  countNumbers(): Promise<number> {
+    return new Promise((resolve, reject) => {
+      resolve(Math.random());
+      //reject(new Error('Error occurred'))
+    })
+  }
+
+  async pressButton() {
+    console.log("Pressed button");
+    this.showNumber = await this.countNumbers();
   }
 }

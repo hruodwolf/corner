@@ -54,11 +54,19 @@ export const routes: Routes = [
       import('./features/measurement-units/pages/measurement-units-asyncawait/measurement-units-asyncawait').then(
         (m) => m.MeasurementUnitsAsyncawait
       ),
-  },  {
+  },
+  {
     path: 'record-list',
     loadComponent: () =>
       import('./features/records/pages/record-list/record-list').then(
         (m) => m.RecordList
+      ),
+  },
+  {
+    path: 'measurement-units-signalstore',
+    loadComponent: () =>
+      import('./features/measurement-units/pages/measurement-units-signalstore/measurement-units-signalstore').then(
+        (m) => m.MeasurementUnitsSignalstore
       ),
   },
 

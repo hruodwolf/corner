@@ -1,0 +1,12 @@
+<p>measurement-units-signalstore works!</p>
+
+@if (store.loading()) {
+Loading...
+}
+<ul>
+@for (mUnit of store.measurementUnits(); track mUnit.id) {
+  <li>{{mUnit.id}} - {{mUnit.nameEn}} - {{mUnit.description}}</li>
+}
+</ul>
+<hr/>
+Sum: {{store.countMeasurementUnits()}}

@@ -1,7 +1,7 @@
 import {Injectable, signal} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {MeasurementUnit} from '../../../core/models/measurement-unit.model';
-import {Observable} from 'rxjs';
+import {delay, lastValueFrom, Observable} from 'rxjs';
 
 
 @Injectable({
@@ -16,12 +16,16 @@ export class MeasurementUnitService {
 
   constructor(private http: HttpClient) { }
 
+  getAll(): Observable<MeasurementUnit[]> {
+    return this.http.get<MeasurementUnit[]>(this.apiUrl);
+  }
+
   // for signal architecture
   loadAll() {
     this.loading.set(true);
     this.error.set(null);
 
-    this.http.get<MeasurementUnit[]>(this.apiUrl).subscribe({
+    this.getAll().subscribe({
       next: (data) => {
         this.measurementUnits.set(data);
         this.loading.set(false);
@@ -32,10 +36,6 @@ export class MeasurementUnitService {
         console.error(err);
       }
     });
-  }
-
-  getAll(): Observable<MeasurementUnit[]> {
-    return this.http.get<MeasurementUnit[]>(this.apiUrl);
   }
 
   loadMeasurementUnits(): Promise<MeasurementUnit[]> {
@@ -50,5 +50,9 @@ export class MeasurementUnitService {
         }
       })
     });
+  }
+
+  loadMeasurementUnitsWithLastValueFrom(): Promise<MeasurementUnit[]> {
+    return lastValueFrom(this.getAll().pipe(delay(1000)));
   }
 }

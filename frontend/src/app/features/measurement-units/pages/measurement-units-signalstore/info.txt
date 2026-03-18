@@ -1,0 +1,5 @@
+https://angular.de/artikel/einfuehrung-in-den-ngrx-signal-store/
+
+https://stackblitz.com/~/github.com/riget/todo-list-ngrx-signal-store
+
+https://ngrx.io/guide/signals/signal-store
