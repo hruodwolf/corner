@@ -69,5 +69,12 @@ export const routes: Routes = [
         (m) => m.MeasurementUnitsSignalstore
       ),
   },
+  {
+    path: 'consumptions',
+    loadComponent: () =>
+      import('./features/records/pages/consumptions/consumptions').then(
+        (m) => m.Consumptions
+      ),
+  },
 
 ];
