@@ -1,1 +1,9 @@
 <p>consumptions works!</p>
+
+<ul>
+@for (record of vm.records(); track record.id) {
+  <li>
+    {{record.id}} - {{record.recordDate}} - {{record.recordValue}}
+  </li>
+}
+</ul>

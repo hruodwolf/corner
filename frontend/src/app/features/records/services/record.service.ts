@@ -1,8 +1,9 @@
 import {Injectable, signal} from '@angular/core';
 import {Record} from '../../../core/models/record.model';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {delay, lastValueFrom, Observable} from 'rxjs';
 import {Records} from '../pages/records/records';
+import {MeasurementUnit} from '../../../core/models/measurement-unit.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,10 @@ export class RecordService {
 
   getRecords(): Observable<Record[]> {
     return this.http.get<Record[]>(this.apiUrl);
+  }
+
+  loadRecordsWithLastValueFrom(): Promise<Record[]> {
+    return lastValueFrom(this.getRecords().pipe(delay(1000)));
   }
 
   create(dto: Partial<Record>): Observable<Record> {
