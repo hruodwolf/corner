@@ -1,7 +1,7 @@
 import {Injectable, signal} from '@angular/core';
 import {Record} from '../../../core/models/record.model';
 import {HttpClient} from '@angular/common/http';
-import {delay, lastValueFrom, Observable} from 'rxjs';
+import {delay, lastValueFrom, map, Observable} from 'rxjs';
 import {Records} from '../pages/records/records';
 import {MeasurementUnit} from '../../../core/models/measurement-unit.model';
 
@@ -38,9 +38,12 @@ export class RecordService {
   getRecords(): Observable<Record[]> {
     return this.http.get<Record[]>(this.apiUrl);
   }
+  getAllHeatingRecords(): Observable<Record[]> {
+    return this.http.get<Record[]>(this.apiUrl).pipe(map((records: Record[]) => records.filter(r => r.recordCategory.id === 1)));
+  }
 
   loadRecordsWithLastValueFrom(): Promise<Record[]> {
-    return lastValueFrom(this.getRecords().pipe(delay(1000)));
+    return lastValueFrom(this.getAllHeatingRecords().pipe(delay(1000)));
   }
 
   create(dto: Partial<Record>): Observable<Record> {

@@ -11,8 +11,29 @@ export const ConsumptionStore = signalStore(
     records: [] as Record[]
   }),
 
-  withComputed(({records}) => ({
-    countRecords: computed(() => records().length)
+  withComputed(({ records }) => ({
+    recordsWithConsumption: computed(() => {
+      const sorted = [...records()]
+        .sort((a, b) =>
+          new Date(a.recordDate).getTime() - new Date(b.recordDate).getTime()
+        );
+
+      return sorted.map((record, index) => {
+        if (index === 0) {
+          return {
+            ...record,
+            consumption: 0
+          };
+        }
+
+        const previous = sorted[index - 1];
+
+        return {
+          ...record,
+          consumption: record.recordValue - previous.recordValue
+        };
+      });
+    })
   })),
 
   withMethods((store) => {

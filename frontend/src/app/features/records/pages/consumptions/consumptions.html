@@ -1,5 +1,13 @@
 <p>consumptions works!</p>
 
+@for (record of vm.recordsWithConsumption(); track record.id) {
+  <div>
+    {{ record.recordDate }}
+    {{ record.recordValue }} kWh
+    ({{ record.consumption }} kWh)
+  </div>
+}
+
 <ul>
 @for (record of vm.records(); track record.id) {
   <li>

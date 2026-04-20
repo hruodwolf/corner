@@ -8,4 +8,6 @@ export class ConsumptionViewModel {
   //Raw data from store
   records = this.store.records;
 
+  recordsWithConsumption = this.store.recordsWithConsumption;
+
 }
